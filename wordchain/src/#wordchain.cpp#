@@ -146,11 +146,10 @@ void printResult(const string& word1, const string& word2, stack<string>& result
     if (result.empty()) {
         cout << "Couldn't find path from " << word2 << " back to " << word1 << ".";
     } else {
-        cout << "Chain from " << word2 << " back to " << word1 << ":" << endl;
-        while (!result.empty()) {
-            cout << result.top() << " ";
-            result.pop();
-        }
+while (!result.empty()) {
+        cout << result.top() << " ";
+        result.pop();
+ }
     }
     cout << endl;
 }
