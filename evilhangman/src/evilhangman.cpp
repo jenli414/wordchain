@@ -38,8 +38,11 @@ int main() {
     askIfShowRemainingWords(showRemainingWords);
     stack<string> wordStack;
     getWords(dictionary, wordLength, wordStack);
+
     return 0;
 }
+
+
 
 void readDictionary(set<string>& dictionary) {
     ifstream input;
@@ -87,7 +90,7 @@ void askForWordLength(int& wordLength, const int& shortestWord, const int& longe
         }
     }
 }
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //FRÅGA KIM OM DETTA
+
 void askForNumOfGuesses(int& numOfGuesses) {
     cout << "Enter number of guesses: ";
     bool validInput = false;
