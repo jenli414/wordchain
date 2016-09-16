@@ -84,7 +84,7 @@ void findShortestChain(const string& word1, const string& word2, stack<string>& 
             setNeighbours(neighbours, currentWord, usedWords, dictionary);
             while (!neighbours.empty()) {
                 stack<string> nextChain = currentChain;
-                nextChain.push(neighbours.front());
+                nextChain(*it)->.push(neighbours.front());
                 neighbours.pop();
                 chains.push(nextChain);
             }
