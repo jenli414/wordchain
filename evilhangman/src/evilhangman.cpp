@@ -36,10 +36,18 @@ int main() {
     askForNumOfGuesses(numOfGuesses);
     bool showRemainingWords;
     askIfShowRemainingWords(showRemainingWords);
+<<<<<<< HEAD
     set<string> remainingWords;
     getRemainingWords(dictionary, wordLength, remainingWords);
+=======
+    stack<string> wordStack;
+    getWords(dictionary, wordLength, wordStack);
+
+>>>>>>> a34ace30e784232029ff2af75ad6f2bd1cf0f3c1
     return 0;
 }
+
+
 
 void readDictionary(set<string>& dictionary) {
     ifstream input;
