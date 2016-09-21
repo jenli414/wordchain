@@ -30,7 +30,6 @@ void setCurrentResult(string& currentResult, const int& wordLength);
 bool checkPlayerWon(const string& currentResult);
 
 void printEndMessage(const bool& playerWon, const string& chosenWord);
-void newGame();
 
 
 int main() {
@@ -98,7 +97,7 @@ void updateCurrentResult(const stack<string>& wordStack, string& currentResult, 
 
 void setCurrentResult(string& currentResult, const int& wordLength){
     stringstream ss;
-    for (int i =0; i< wordLength; ++i){
+    for (int i =0; i< wordLength; ++i){largestWordFamily = currentWordFamily;
         ss << "-";
     }
     currentResult = ss.str();
@@ -279,5 +278,3 @@ void printEndMessage(const bool& playerWon, const string& chosenWord) {
         cout << "You're out of guesses! The correct word was " << chosenWord << endl;
     }
 }
-
-void newGame();
