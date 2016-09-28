@@ -23,7 +23,8 @@ public:
     void raise(int x, int y);               // Puts the tile in index x,y at the top, if none, do nothing.
     void remove(int x, int y);              // Remove the (top) tile in index x,y. Re-orders tiles if needed.
     void removeAll(int x, int y);           // Removes all tiles in index x,y. Re-orders tiles if needed.
-
+    void isEmpty();
+    
 private:
     Tile tileList[];
     int capacity = 10;

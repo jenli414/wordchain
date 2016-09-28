@@ -8,13 +8,13 @@
 
 TileList::TileList()
 {
-    this->tileList = tileList[this->capacity];
+    tileList = tileList[capacity];
 
 }
 
 TileList::isEmpty()
 {
-    return this->occupied == 0;
+    return occupied == 0;
 }
 
 
