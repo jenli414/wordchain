@@ -191,8 +191,7 @@ void askIfShowNumOfPossibleWords(bool& showNumOfPossibleWords) {
             showNumOfPossibleWords = true;
             cout << endl;
             validInput = true;
-        } else if (answer == "n") {void getWordLengthLimits(const set<string>& dictionary, int& shortestWord,
-                                                            int& longestWord);
+        } else if (answer == "n") {
             showNumOfPossibleWords = false;
             cout << endl;
             validInput = true;
@@ -217,17 +216,16 @@ void setInitialLargestWordFamily(const set<string>& dictionary,
 // Asks user for a valid guess.
 void askForGuess(set<char>& alreadyGuessedLetters, char& guess) {
     string input;
-    locale loc;
     cout << "Enter a guess: ";
     bool validInput = false;
     while (!validInput) {
         cin >> input;
-        string::iterator firstChar = input.begin();
-        if (input.length() != 1 || !(isalpha(*firstChar, loc))) {
+        if (input.length() != 1 || !(isalpha(*input.begin()))) {
             cout << endl << "Enter a LETTER!: ";
         } else {
             stringstream convert(input);
             convert >> guess;
+            guess = tolower(guess);
             if (alreadyGuessedLetters.count(guess) == 1) {
                 cout << endl << "You have already guessed that! Try again: ";
             } else {
