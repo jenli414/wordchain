@@ -18,6 +18,7 @@ void startGame(const set<string>& dictionary, const unsigned int& shortestWord,
 void askForWordLength(int& iWordLength, const unsigned int& shortestWord,
                       const unsigned int& longestWord);
 void askForNumOfGuesses(int& iNumOfGuesses);
+bool isAllNumbers(const string& input);
 void askIfShowNumOfPossibleWords(bool& showNumOfPossibleWords);
 void setInitialLargestWordFamily(const set<string>& dictionary,
                                  const unsigned int& uWordLength,
@@ -135,26 +136,29 @@ void askForWordLength(int& iWordLength, const unsigned int& shortestWord,
                       const unsigned int& longestWord) {
     cout << "Enter a word length between " << shortestWord << " and "
          << longestWord << ": ";
+    string input;
     bool validInput = false;
     while (!validInput) {
-        if (!(cin >> iWordLength)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //FRÅGA KIM OM DETTA
-            cout << endl << "Enter a NUMBER between " << shortestWord << " and "
-                 << longestWord << "!: ";
-
-        } else if (iWordLength < 0) {
-            cout << endl << "Enter a number BETWEEN " << shortestWord << " and "
-                 << longestWord << "!: ";
-        } else {
-            unsigned int uWordLength = iWordLength;
-            if ((uWordLength < shortestWord) || (uWordLength > longestWord)) {
+        cin >> input;
+        if (isAllNumbers(input)) {
+            stringstream convert(input);
+            convert >> iWordLength;
+            if (iWordLength < 0) {
                 cout << endl << "Enter a number BETWEEN " << shortestWord << " and "
                      << longestWord << "!: ";
             } else {
-                cout << endl;
-                validInput = true;
+                unsigned int uWordLength = iWordLength;
+                if ((uWordLength < shortestWord) || (uWordLength > longestWord)) {
+                    cout << endl << "Enter a number BETWEEN " << shortestWord << " and "
+                         << longestWord << "!: ";
+                } else {
+                    cout << endl;
+                    validInput = true;
+                }
             }
+        } else {
+            cout << endl << "Enter a NUMBER between " << shortestWord << " and "
+                 << longestWord << "!: ";
         }
     }
 }
@@ -162,22 +166,34 @@ void askForWordLength(int& iWordLength, const unsigned int& shortestWord,
 // Asks how many guesses the user wants. Has to be an integer greater than 0.
 void askForNumOfGuesses(int& iNumOfGuesses) {
     cout << "Enter number of guesses: ";
+    string input;
     bool validInput = false;
     while (!validInput) {
-        if (!(cin >> iNumOfGuesses)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << endl << "Enter a NUMBER greater than 0!: ";
-        } else if (iNumOfGuesses < 1) {
-            cout << endl << "Enter a number GREATER than 0!: ";
-        } else {
-            if (iNumOfGuesses > 26) {
-                iNumOfGuesses = 26;
+        cin >> input;
+        if (isAllNumbers(input)) {
+            stringstream convert(input);
+            convert >> iNumOfGuesses;
+            if (iNumOfGuesses > 1) {
+                if (iNumOfGuesses > 26) {
+                    iNumOfGuesses = 26;
+                }
+                cout << endl;
+                validInput = true;
             }
-            cout << endl;
-            validInput = true;
+        }
+        if (!validInput) {
+            cout << endl << "Enter a positive number!: ";
         }
     }
+}
+
+bool isAllNumbers(const string& input) {
+    for (string::const_iterator it = input.begin(); it != input.end(); ++it) {
+        if (!isdigit(*it)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // Asks if the user wants to see how many possible words remain.
