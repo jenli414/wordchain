@@ -8,15 +8,10 @@
 
 TileList::TileList()
 {
-    tileList = tileList[capacity];
-
+    capacity = 10;
+    occupied = 0;
+    tileList = new Tile[capacity];
 }
-
-TileList::isEmpty()
-{
-    return occupied == 0;
-}
-
 
 TileList::~TileList()
 {
@@ -56,6 +51,11 @@ void TileList::remove(int x, int y)
 void TileList::removeAll(int x, int y)
 {
     // TODO: write this member
+}
+
+bool TileList::isEmpty()
+{
+    return occupied == 0;
 }
 
 /*
