@@ -10,7 +10,6 @@
 #include <set>
 #include <sstream>
 
-
 using namespace std;
 
 // Function declarations.
@@ -18,9 +17,7 @@ void printWelcomeMessage();
 void getWordsFromUser(string& word1, string& word2);
 void findShortestChain(const string& word1, const string& word2, stack<string>& result);
 void setDictionary(set<string>& dictionary);
-void setNeighbours(queue<string>& neighbours, const string& currentWord, set<string>& usedWords, const set<string>& dictionary);
-void addNeighbour(const string& word, queue<string>& neighbours, set<string>& usedWords, const set<string>& dictionary);
-bool isValidWord(const string& word, const set<string>& dictionary);
+void setNeighbours(queue<string>& neighbours, const string& word, set<string>& usedWords, const set<string>& dictionary);
 void printResult(const string& word1, const string& word2, stack<string>& result);
 void printEndMessage();
 
@@ -84,7 +81,7 @@ void findShortestChain(const string& word1, const string& word2, stack<string>& 
             setNeighbours(neighbours, currentWord, usedWords, dictionary);
             while (!neighbours.empty()) {
                 stack<string> nextChain = currentChain;
-                nextChain(*it)->.push(neighbours.front());
+                nextChain.push(neighbours.front());
                 neighbours.pop();
                 chains.push(nextChain);
             }
@@ -104,41 +101,22 @@ void setDictionary(set<string>& dictionary) {
 }
 
 // Sets the queue of valid neighbours of a word.
-void setNeighbours(queue<string>& neighbours, const string& currentWord,
+void setNeighbours(queue<string>& neighbours, const string& word,
                    set<string>& usedWords, const set<string>& dictionary) {
-    string word;
-    int currentWordLength = currentWord.length();
+    string newWord;
+    int currentWordLength = word.length();
     int alphabethLength = ALPHABET.length();
-    for (int j = 0; j < alphabethLength; ++j) {
-        for (int i = 0; i < currentWordLength - 1; ++i) {
-            stringstream ss;
-            ss << currentWord.substr(0,i) << ALPHABET[j] <<
-                  currentWord.substr(i + 1,currentWord.length() - i);
-            word = ss.str();
-            addNeighbour(word, neighbours, usedWords, dictionary);
+    for (int i = 0; i < currentWordLength; ++i) {
+        newWord = word;
+        for (int j = 0; j < alphabethLength; ++j) {
+            newWord[i] = ALPHABET[j];
+            if ((usedWords.count(newWord) != 1) && (dictionary.count(newWord) == 1)) {
+                neighbours.push(newWord);
+                usedWords.insert(newWord);
+            }
         }
-    }
-    string wordMinusLastLetter = currentWord.substr(0,currentWordLength - 1);
-    for (int j = 0; j < alphabethLength; ++j) {
-        stringstream ss;
-        ss << wordMinusLastLetter << ALPHABET[j];
-        word = ss.str();
-        addNeighbour(word, neighbours, usedWords, dictionary);
-    }
-}
 
-// Adds a word to neighbours if it hasn't already been used and is a valid word.
-void addNeighbour(const string& word, queue<string>& neighbours, set<string>& usedWords,
-                  const set<string>& dictionary) {
-    if ((usedWords.count(word) != 1) && (isValidWord(word, dictionary))) {
-        neighbours.push(word);
-        usedWords.insert(word);
     }
-}
-
-// Returns whether a word is valid by checking if it's in the dictionary.
-bool isValidWord(const string& word, const set<string>& dictionary) {
-    return dictionary.count(word) == 1;
 }
 
 // Prints the result to the user.

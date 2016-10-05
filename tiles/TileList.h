@@ -17,6 +17,7 @@ public:
     TileList();                             // Constructs an empty list with a capacity of 10 tiles.
     ~TileList();                            // Destructor, frees all dynamically allocated memory used.
     void addTile(Tile tile);                // Adds a tile to itself, on top.
+    void checkExpand();                     // Checks if we need to expand the array
     void drawAll(QGraphicsScene* scene);    // Draws its own tiles, bottom to top, by calling each tile's draw-function.
     int indexOfTopTile(int x, int y);       // Index of the top tile, if none, return -1.
     void lower(int x, int y);               // Puts the tile in index x,y at the bottom, if none, do nothing.
@@ -26,9 +27,9 @@ public:
     bool isEmpty();
 
 private:
-    int capacity;
-    int occupied;
-    Tile *tileList;
+    int m_capacity = 10;
+    int m_occupied = 0;
+    Tile *m_tileList = new Tile[m_capacity];
 };
 
 #endif // TILELIST_H

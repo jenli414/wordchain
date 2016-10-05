@@ -6,21 +6,28 @@
 
 #include "TileList.h"
 
-TileList::TileList()
-{
-    capacity = 10;
-    occupied = 0;
-    tileList = new Tile[capacity];
-}
+TileList::TileList() {}
 
 TileList::~TileList()
 {
-    // TODO: write this member
+    delete[] m_tileList;
 }
 
 void TileList::addTile(Tile tile)
 {
     // TODO: write this member
+}
+
+void TileList::checkExpand() {
+    if (m_occupied == m_capacity) {
+        Tile* expandedTileList = new Tile[m_capacity * 2];
+        for (int i = 0; i < m_capacity; i++) {
+            expandedTileList[i] = m_tileList[i];
+        }
+        m_capacity *= 2;
+        delete[] m_tileList;
+        m_tileList = expandedTileList;
+    }
 }
 
 void TileList::drawAll(QGraphicsScene* scene)
@@ -55,7 +62,7 @@ void TileList::removeAll(int x, int y)
 
 bool TileList::isEmpty()
 {
-    return occupied == 0;
+    return m_occupied == 0;
 }
 
 /*
