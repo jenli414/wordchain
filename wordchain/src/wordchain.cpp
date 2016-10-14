@@ -17,7 +17,7 @@ using namespace std;
 void printWelcomeMessage();
 void getWordsFromUser(string& word1, string& word2);
 void findShortestChain(const string& word1, const string& word2, stack<string>& result);
-void setDictionary(set<string>& dictionary);
+void setDictionary(set<string>& dictionary, const string& word);
 void setNeighbours(queue<string>& neighbours, const string& currentWord, set<string>& usedWords, const set<string>& dictionary);
 void addNeighbour(const string& word, queue<string>& neighbours, set<string>& usedWords, const set<string>& dictionary);
 bool isValidWord(const string& word, const set<string>& dictionary);
@@ -64,12 +64,12 @@ void findShortestChain(const string& word1, const string& word2, stack<string>& 
     firstChain.push(word1);
     stack<string> currentChain;
     string currentWord;
-    set<string> dictionary;
-    setDictionary(dictionary);
     set<string> usedWords = {word1};
     queue<string> neighbours;
     if (word1.length() == word2.length()) {
         chains.push(firstChain);
+        set<string> dictionary;
+        setDictionary(dictionary, word1);
     }
     while (!chains.empty()) {
         currentChain = chains.front();
@@ -92,14 +92,17 @@ void findShortestChain(const string& word1, const string& word2, stack<string>& 
     }
 }
 
-// Opens dictionary.txt and stores the words from it in a set<string>.
-void setDictionary(set<string>& dictionary) {
+/* Opens dictionary.txt and stores the words with correct word length from
+ * it in a set<string>. */
+void setDictionary(set<string>& dictionary, const string& word) {
     ifstream input;
     input.open("dictionary.txt");
-    string word;
-    while (getline(input, word)) {
-        dictionary.insert(word);
+    string dicWord;
+    while (getline(input, dicWord)) {
+        if (dicWord.length() == word.length) {
+            dictionary.insert(word);
         }
+    }
     input.close();
 }
 
