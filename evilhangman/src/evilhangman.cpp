@@ -1,3 +1,6 @@
+/*  Laboration 2
+ *  jenli414 och sabse455
+ */
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -7,8 +10,6 @@
 #include <limits>
 
 using namespace std;
-
-const string ALPHABET  = "abcdefghijklmnopqrstuvwxyz";
 
 void readDictionary(set<string>& dictionary);
 void getWordLengthLimits(const set<string>& dictionary, unsigned int& shortestWord,
@@ -52,7 +53,7 @@ int main() {
     cout << "Welcome to Hangman." << endl << endl;
     char userAction = 's';
     bool run = true;
-    while(run) {
+    while(run) {//adasd
         switch(userAction) {
         case 's':
             startGame(dictionary, shortestWord, longestWord);
@@ -83,7 +84,7 @@ void getWordLengthLimits(const set<string>& dictionary, unsigned int& shortestWo
     string word;
     for (set<string>::const_iterator it =
          dictionary.begin(); it != dictionary.end(); ++it) {
-        word = *it;
+        word = *it;//adasdrs
         if (shortestWord == 0) {
             shortestWord = word.length();
         } else if (word.length() < shortestWord) {
@@ -321,18 +322,17 @@ void checkBranches(queue<stack<string>>& wordFamilies, stack<string>& equalsGues
 
 // Removes every word family in wordFamilies but the largest one.
 void keepLargestWordFamily(queue<stack<string>>& wordFamilies) {
-    unsigned int biggestFamily = wordFamilies.front().size();
-    wordFamilies.push(wordFamilies.front());
+    stack<string> largestWordFamily = wordFamilies.front();
     wordFamilies.pop();
     stack<string> currentFamily;
-    while (!(wordFamilies.size() == 1)) {
+    while (!wordFamilies.empty()) {
         currentFamily = wordFamilies.front();
-        if (currentFamily.size() > biggestFamily) {
-            wordFamilies.push(currentFamily);
-            biggestFamily = currentFamily.size();
+        if (currentFamily.size() > largestWordFamily.size()) {
+            largestWordFamily = currentFamily;
         }
         wordFamilies.pop();
     }
+    wordFamilies.push(largestWordFamily);
 }
 
 // Returns true if every letter in chosenWord has been guessed.

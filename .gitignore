@@ -23,7 +23,17 @@
 *.a
 *.lib
 
+<<<<<<< HEAD
 # Qt-es
+=======
+# Executables
+*.exe
+*.out
+*.app
+
+# Qt-es
+
+>>>>>>> d5b572aaade2f6eeaea4c8818009ae9f743f7098
 /.qmake.cache
 /.qmake.stash
 *.pro.user
@@ -31,6 +41,10 @@
 *.qbs.user
 *.qbs.user.*
 *.moc
+<<<<<<< HEAD
+=======
+moc_*.cpp
+>>>>>>> d5b572aaade2f6eeaea4c8818009ae9f743f7098
 qrc_*.cpp
 ui_*.h
 Makefile*
@@ -38,6 +52,7 @@ Makefile*
 *.DS_Store
 
 # QtCreator
+<<<<<<< HEAD
 *.autosave
 
 # QtCreator Qml
@@ -47,3 +62,14 @@ Makefile*
 # QtCraetor CMake
 CMakeLists.txt.user*
 
+=======
+
+*.autosave
+
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCtreator CMake
+CMakeLists.txt.user*
+>>>>>>> d5b572aaade2f6eeaea4c8818009ae9f743f7098

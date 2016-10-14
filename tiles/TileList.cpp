@@ -11,6 +11,7 @@ TileList::TileList() {}
 TileList::~TileList()
 {
     delete[] m_tileList;
+<<<<<<< HEAD
 }
 
 void TileList<T>::checkResize() {
@@ -23,11 +24,25 @@ void TileList<T>::checkResize() {
         m_tileList = newTileList;
         delete[] m_tileList;
     }
+=======
+>>>>>>> d5b572aaade2f6eeaea4c8818009ae9f743f7098
 }
 
 void TileList::addTile(Tile tile)
 {
     // TODO: write this member
+}
+
+void TileList::checkExpand() {
+    if (m_occupied == m_capacity) {
+        Tile* expandedTileList = new Tile[m_capacity * 2];
+        for (int i = 0; i < m_capacity; i++) {
+            expandedTileList[i] = m_tileList[i];
+        }
+        m_capacity *= 2;
+        delete[] m_tileList;
+        m_tileList = expandedTileList;
+    }
 }
 
 void TileList::drawAll(QGraphicsScene* scene)
