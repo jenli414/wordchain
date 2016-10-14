@@ -23,7 +23,27 @@
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
+# Qt-es
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+qrc_*.cpp
+ui_*.h
+Makefile*
+*build-*
+*.DS_Store
+
+# QtCreator
+*.autosave
+
+# QtCreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCraetor CMake
+CMakeLists.txt.user*
+
