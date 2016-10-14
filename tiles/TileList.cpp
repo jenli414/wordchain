@@ -6,16 +6,23 @@
 
 #include "TileList.h"
 
-TileList::TileList()
-{
-    capacity = 10;
-    occupied = 0;
-    tileList = new Tile[capacity];
-}
+TileList::TileList() {}
 
 TileList::~TileList()
 {
-    // TODO: write this member
+    delete[] m_tileList;
+}
+
+void TileList<T>::checkResize() {
+    if (m_occupied == m_capacity) {
+        Tile* newTileList = new Tile[m_capacity * 2];
+        for (int i = 0; i < m_occupied; i++) {
+            newTileList[i] = m_tileList[i];
+        }
+        m_capacity *= 2;
+        m_tileList = newTileList;
+        delete[] m_tileList;
+    }
 }
 
 void TileList::addTile(Tile tile)
@@ -55,7 +62,7 @@ void TileList::removeAll(int x, int y)
 
 bool TileList::isEmpty()
 {
-    return occupied == 0;
+    return m_occupied == 0;
 }
 
 /*

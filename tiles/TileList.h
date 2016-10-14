@@ -26,9 +26,9 @@ public:
     bool isEmpty();
 
 private:
-    int capacity;
-    int occupied;
-    Tile *tileList;
+    int m_capacity = 10;
+    int m_occupied = 0;
+    Tile* m_tileList = new Tile[m_capacity];
 };
 
 #endif // TILELIST_H
